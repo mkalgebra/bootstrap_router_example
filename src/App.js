@@ -1,23 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import StyledComponent from './components/StyledComponent/StyledComponent';
+import BSComponent from './components/BSComponent/BSComponent';
+import { Link } from 'react-router-dom';
+
+const withColorHOC = function(Element){
+  return function({color, ...otherProps}){
+    console.log(otherProps)
+    return <Element {...otherProps} style={{backgroundColor: color}}/>
+  }
+}
+
+const Button = props => {
+  return <button {...props}/>
+}
+
+const ColoredButton = withColorHOC(Button);
+
+const titleStyleInline = {
+  color: 'blue',
+  backgroundColor: 'purple',
+  fontSize: '25px'
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p style={titleStyleInline}>HOC</p>
+      <ColoredButton color="red">
+        Crveni
+      </ColoredButton>
+        <ColoredButton color="yellow">
+        Zuti
+      </ColoredButton>
+        <ColoredButton color="green">
+        Zeleni
+      </ColoredButton>
+      <StyledComponent/>
+      <BSComponent/>
+      <p>Pages:</p>
+      <Link to="/users">Users</Link>
+      <br/>
+      <Link to="/teletabisi">Teletabisi</Link>
     </div>
   );
 }
